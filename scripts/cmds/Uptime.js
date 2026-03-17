@@ -59,7 +59,7 @@ const info = await api.getUserInfo(senderID);
 userName = info[senderID].name;
 } catch (e) { userName = "Developer"; }
 
-const imgUrl = "https://i.imgur.com/xHpbI1i.jpeg";
+const imgUrl = "https://i.imgur.com/TDkyAdv.jpeg";
 const userImgUrl = `https://graph.facebook.com/${senderID}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
 const cachePath = path.join(__dirname, "cache", `up_milon_final_${Date.now()}.png`);
 
