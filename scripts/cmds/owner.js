@@ -45,9 +45,9 @@ module.exports = {
 [‎📞] 𝐖𝐇𝐀𝐓'𝐒 𝐀𝐏𝐏 👉:[https://wa.me/+8801934640061]
 _____________🅲🅾🅽🆃🅰🅲🆃_____________
 
-[‎🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❶)💥 : https://www.facebook.com/DARK.XAIKO.420
+[‎🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❶)💥 : https://m.me/MR.FARHAN.420
 
-[‎🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❷)💥 : https://www.facebook.com/DEVIL.FARHAN.420
+[‎🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❷)💥 : https://www.facebook.com/MR.FARHAN.420
 `;
 
     const cacheDir = path.join(__dirname, "cache");
