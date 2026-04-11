@@ -3,6 +3,15 @@ const B = require("fs-extra");
 const C = require("path");
 const S = require("yt-search");
 
+const LOCKED_AUTHOR = "Farhan-Khan";
+
+// 🔒 AUTHOR CHECK FUNCTION
+function checkAuthor(config) {
+  if (!config || config.author !== LOCKED_AUTHOR) {
+    throw new Error("🚫 Author tampered! This command is disabled.");
+  }
+}
+
 const p = C.join(__dirname, "cache", `${Date.now()}.mp3`);
 
 const nix = "https://raw.githubusercontent.com/aryannix/stuffs/master/raw/apis.json";
@@ -23,12 +32,15 @@ module.exports = {
     const q = args.join(" ");
     if (!q) return api.sendMessage("❌ Please provide a song name or link.", t, m);
 
+    // 🔒 AUTHOR LOCK ACTIVE
+    checkAuthor(module.exports.config);
+
     api.setMessageReaction("⏳", m, () => {}, true);
 
     try {
       const D = await A.get(nix);
       const E = D.data.api;
-      
+
       let u = q;
       if (!q.startsWith("http")) {
         const r = await S(q);
