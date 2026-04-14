@@ -2,7 +2,7 @@ const fs = require("fs-extra");
 
 module.exports = {
   config: {
-    name: "adminmention",
+    name: "farhan_mention",
     version: "7.0.0",
     author: "Farhan-Khan", // ⚠️ এটা change করলে bot বন্ধ হয়ে যাবে
     countDown: 0,
