@@ -1,13 +1,15 @@
-const fs = require("fs-extra");
+const axios = require("axios");
+
+let videoIndex = 0;
 
 module.exports = {
   config: {
-    name: "farhan_mention",
-    version: "7.0.0",
-    author: "Farhan-Khan", // ⚠️ এটা change করলে bot বন্ধ হয়ে যাবে
+    name: "rakib",
+    version: "20.0.0",
+    author: "Farhan-Khan",
     countDown: 0,
     role: 0,
-    shortDescription: "Admin mention reply styled",
+    shortDescription: "Fast caption + video reply",
     category: "system"
   },
 
@@ -15,75 +17,70 @@ module.exports = {
 
   onChat: async function ({ event, message }) {
 
-    // 🔒 AUTHOR LOCK
-    if (this.config.author !== "Farhan-Khan") {
-      console.log("⚠️ Author changed! Module stopped.");
-      return;
-    }
+    // 🔒 Author lock
+    if (this.config.author !== "Farhan-Khan") return;
 
-    // 👑 ADMINS
     const admins = [
-      {
-        uid: "61573366160918",
-        names: ["মিৃঁ'স্টাৃঁ'রৃঁ ফাৃঁ'রৃঁ'হা্ঁ'নৃঁ"]
-      },
-      {
-        uid: "61583610247347",
-        names: ["ヽ｟ᏟᎬϴ｠▁▁ዐዐዐ 🙁😚☺️👿"]
-      }
+      { uid: "61584866024929", names: ["Rakib Ctg","রাকিব","rakib","Rakib"] },
+      { uid: "61583610247347", names: ["ヽ｟ᏟᎬϴ｠▁▁ዐዐዐ 🙁😚☺️👿"] }
     ];
 
     const senderID = String(event.senderID);
-
-    // ❌ Admin নিজে লিখলে reply দিবে না
     if (admins.some(a => a.uid === senderID)) return;
 
-    const text = (event.body || "").toLowerCase().trim();
+    const text = (event.body || "").toLowerCase();
     const mentionedIDs = event.mentions ? Object.keys(event.mentions) : [];
 
-    // 🔍 MENTION DETECT
     const isMentioning = admins.some(admin =>
       mentionedIDs.includes(admin.uid) ||
-      text.includes(admin.uid) ||
       admin.names.some(name => text.includes(name.toLowerCase()))
     );
 
     if (!isMentioning) return;
 
-    // 💬 RAW CAPTIONS
-    const captions = [
-      "Mantion_দিস না _ফারহান বস এর মন মন ভালো নেই আস্কে-!💔🥀",
-      "- আমার বস ফারহান এর সাথে কেউ সেক্স করে না থুক্কু টেক্স করে নাহ🫂💔",
-      "👉আমার বস ♻️ 𝐑𝐉 𝐅𝐀𝐑𝐇𝐀𝐍 এখন বিজি আছে । তার ইনবক্সে এ মেসেজ দিয়ে রাখো 🔰 ♪√বস ফ্রি হলে আসবে🧡😁😜🐒",
-      "বস ফারহান কে এত মেনশন না দিয়ে বক্স আসো হট করে দিবো🤷‍ঝাং 😘🥒",
-      "বস ফারহান কে Mantion_দিলে চুম্মাইয়া ঠুটের কালার change কইরা,লামু 💋😾😾🔨",
-      "ফারহান বস এখন বিজি জা বলার আমাকে বলতে পারেন_!!😼🥰",
-      "ফারহান বস কে এতো মেনশন নাহ দিয়া বস কে একটা জি এফ দে 😒 😏",
-      "Mantion_না দিয়ে বস ফারহান এর সাথে সিরিয়াস প্রেম করতে চাইলে ইনবক্স",
-      "বস ফারহান কে মেনশন দিসনা পারলে একটা জি এফ দে",
-      "বাল পাকনা Mantion_দিস না বস ফারহান প্রচুর বিজি আছে 🥵🥀🤐",
-      "চুমু খাওয়ার বয়স টা আমার বস ফারহান চকলেট🍫খেয়ে উড়িয়ে দিল 🤗"
+    const videos = [
+      "https://i.imgur.com/ehDFpZp.mp4",
+      "https://i.imgur.com/BAuoKdn.mp4"
     ];
 
-    const formatCaption = (text) => {
-      return `
-━━━━━━━━━━━━━━━━━━━━
-- ${text}
-━━━━━━━━━━━━━━━━━━━━
-   [>ʙᴏᴛ ᴏᴡɴᴇʀ:-ꜰᴀʀʜᴀɴ-ᴋʜᴀɴ<]
-━━━━━━━━━━━━━━━━━━━━
-      `;
-    };
+    const videoUrl = videos[videoIndex];
+    videoIndex = (videoIndex + 1) % videos.length;
 
-    const rawCaption = captions[Math.floor(Math.random() * captions.length)];
-    const styledCaption = formatCaption(rawCaption);
+    const captions = [
+      "Mantion_দিস না _রাকিব বস এর মন ভালো নেই আজকে-!💔🥀",
+      "- আমার বস রাকিব এর সাথে কেউ টেক্স করে না 🫂💔",
+      "👉আমার বস রাকিব এখন বিজি আছে । ইনবক্সে মেসেজ দাও 🔰https://www.facebook.com/MR.FARHAN.420- ✅",
+      "বস রাকিব কে এত মেনশন না দিয়ে একটু শান্তি দাও 🤷‍♂️",
+      "বস রাকিব এখন অনেক বিজি আছে যা বলার আমাকে বলেন-😼🥰",
+      "বাল পাকনা Mantion_দিস না বস রাকিব প্রচুর বিজি 🥵🥀🤐"
+    ];
+
+    const mentionNames = mentionedIDs.map(id => `@${id}`).join(", ");
+
+    const caption = `
+✿•≫───────────────≪•✿
+${mentionNames ? `Reply to: ${mentionNames}\n` : ""}
+『 ${captions[Math.floor(Math.random() * captions.length)]} 』
+✿•≫───────────────≪•✿
+`;
 
     try {
-      await message.reply({
-        body: styledCaption
+      const videoStream = await axios({
+        url: videoUrl,
+        method: "GET",
+        responseType: "stream",
+        timeout: 8000,
+        headers: { "User-Agent": "Mozilla/5.0" }
       });
+
+      await message.reply({
+        body: caption,
+        attachment: videoStream.data
+      });
+
     } catch (err) {
-      console.log("Error sending admin reply:", err);
+      console.log("❌ Video error:", err.message);
+      await message.reply("😢 ভিডিও দিতে পারলাম না");
     }
   }
 };
